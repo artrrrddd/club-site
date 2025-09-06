@@ -86,11 +86,6 @@ export default function LoginPage() {
               {loading ? "Вход..." : "Войти"}
             </Button>
           </form>
-          <div className="mt-4 text-sm text-gray-600">
-            <p>Тестовые данные:</p>
-            <p>Email: admin@example.com</p>
-            <p>Пароль: admin123</p>
-          </div>
         </CardContent>
       </Card>
     </div>
