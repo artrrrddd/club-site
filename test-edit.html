@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест редактирования</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        .result { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <h1>Тест редактирования новостей и промо</h1>
+    
+    <div class="test-section">
+        <h2>Тест новостей</h2>
+        <button onclick="testNewsEdit()">Тестировать редактирование новости</button>
+        <div id="news-result" class="result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Тест промо</h2>
+        <button onclick="testPromoEdit()">Тестировать редактирование промо</button>
+        <div id="promo-result" class="result"></div>
+    </div>
+
+    <script>
+        async function testNewsEdit() {
+            const resultDiv = document.getElementById('news-result');
+            resultDiv.innerHTML = 'Тестируем...';
+            
+            try {
+                // Получаем текущие новости
+                const getResponse = await fetch('http://localhost:3000/api/news');
+                const news = await getResponse.json();
+                
+                if (news.length === 0) {
+                    resultDiv.innerHTML = '<div class="error">Нет новостей для тестирования</div>';
+                    return;
+                }
+                
+                const firstNews = news[0];
+                resultDiv.innerHTML = `Редактируем новость: ${firstNews.title}`;
+                
+                // Обновляем новость
+                const updateResponse = await fetch(`http://localhost:3000/api/news/${firstNews.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: 'ОБНОВЛЕННАЯ НОВОСТЬ - ' + new Date().toLocaleTimeString(),
+                        excerpt: 'Обновленное описание - ' + new Date().toLocaleTimeString(),
+                        coverUrl: 'https://example.com/updated-news.jpg'
+                    })
+                });
+                
+                if (updateResponse.ok) {
+                    const updatedNews = await updateResponse.json();
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Новость успешно обновлена!<br>
+                            Новый заголовок: ${updatedNews.title}<br>
+                            Новое описание: ${updatedNews.excerpt}
+                        </div>
+                    `;
+                } else {
+                    const error = await updateResponse.text();
+                    resultDiv.innerHTML = `<div class="error">❌ Ошибка: ${error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Ошибка: ${error.message}</div>`;
+            }
+        }
+        
+        async function testPromoEdit() {
+            const resultDiv = document.getElementById('promo-result');
+            resultDiv.innerHTML = 'Тестируем...';
+            
+            try {
+                // Получаем текущие промо
+                const getResponse = await fetch('http://localhost:3000/api/promos');
+                const promos = await getResponse.json();
+                
+                if (promos.length === 0) {
+                    resultDiv.innerHTML = '<div class="error">Нет промо для тестирования</div>';
+                    return;
+                }
+                
+                const firstPromo = promos[0];
+                resultDiv.innerHTML = `Редактируем промо: ${firstPromo.title}`;
+                
+                // Обновляем промо
+                const updateResponse = await fetch(`http://localhost:3000/api/promos/${firstPromo.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: 'ОБНОВЛЕННОЕ ПРОМО - ' + new Date().toLocaleTimeString(),
+                        excerpt: 'Обновленное описание промо - ' + new Date().toLocaleTimeString(),
+                        coverUrl: 'https://example.com/updated-promo.jpg'
+                    })
+                });
+                
+                if (updateResponse.ok) {
+                    const updatedPromo = await updateResponse.json();
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            ✅ Промо успешно обновлено!<br>
+                            Новый заголовок: ${updatedPromo.title}<br>
+                            Новое описание: ${updatedPromo.excerpt}
+                        </div>
+                    `;
+                } else {
+                    const error = await updateResponse.text();
+                    resultDiv.innerHTML = `<div class="error">❌ Ошибка: ${error}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Ошибка: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>

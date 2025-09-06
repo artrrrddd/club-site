@@ -1,0 +1,5 @@
+[33m2c5ac2f[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m Fix build errors and environment variables
+[33m4636ff8[m fix: remove secrets from .env.example
+[33m58d446b[m fix: resolve ESLint errors for Vercel deployment
+[33ma117da1[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m merge: resolve initial README/gitignore
+[33mf5dc0d7[m chore: initial commit

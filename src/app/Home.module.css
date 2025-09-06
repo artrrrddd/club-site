@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+align-items: center;
+flex-direction: column;
+}
+
+.Header {
+    display: flex;
+}
+
+.footer {
+    display: flex;
+}
+
+.Button:hover {
+    background-color: crimson;
+    color: lime;
+}
+
+.cardwrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.Card {
+    background-color: #708090
+
+;
+    color: white;
+}
