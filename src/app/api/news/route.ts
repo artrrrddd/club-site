@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import { newsApi } from "@/lib/data";
 import { newsSchema } from "@/validation/news";
 
-export const runtime = "nodejs";
-
 export async function HEAD() {
   return new NextResponse(null, { status: 200 });
 }

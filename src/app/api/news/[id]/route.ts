@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { newsApi, debugData } from "@/lib/data";
 import { newsSchema } from "@/validation/news";
 
-export const runtime = "nodejs";
-
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
