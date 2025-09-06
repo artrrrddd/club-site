@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { promosApi, debugData } from "@/lib/data";
 import { z } from "zod";
 
+export const runtime = "nodejs";
+
 const promoSchema = z.object({
   title: z.string().min(3, "Минимум 3 символа"),
   excerpt: z.string().max(200).optional(),
