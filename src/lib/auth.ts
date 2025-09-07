@@ -3,7 +3,21 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 // Простая проверка аутентификации без Prisma
 const checkUser = async (email: string, password: string) => {
-  // Проверяем тестовые данные
+  // Получаем учетные данные из переменных окружения
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  
+  // Проверяем учетные данные из .env
+  if (adminEmail && adminPassword && email === adminEmail && password === adminPassword) {
+    return {
+      id: "1",
+      email: adminEmail,
+      name: "Admin",
+      role: "ADMIN",
+    };
+  }
+  
+  // Fallback для тестовых данных (можно удалить после проверки)
   if (email === "admin@example.com" && password === "admin123") {
     return {
       id: "1",
@@ -12,6 +26,7 @@ const checkUser = async (email: string, password: string) => {
       role: "ADMIN",
     };
   }
+  
   return null;
 };
 
@@ -31,6 +46,8 @@ export const authOptions: NextAuthOptions = {
           }
 
           console.log("Attempting to authenticate user:", credentials.email);
+          console.log("Admin email from env:", process.env.ADMIN_EMAIL);
+          console.log("Admin password from env:", process.env.ADMIN_PASSWORD ? "***" : "not set");
 
           const user = await checkUser(credentials.email, credentials.password);
 

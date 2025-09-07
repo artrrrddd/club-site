@@ -46,6 +46,8 @@ export default async function Home() {
   }
 
   return (
+    <main className="relative min-h-dvh overflow-hidden">
+      
     <div className={s.wrapper}>
       <header className={s.Header}>
         <div className="flex space-x-4">
@@ -127,5 +129,6 @@ export default async function Home() {
         </Card>
       </div>
     </div>
+    </main>
   );
 }
