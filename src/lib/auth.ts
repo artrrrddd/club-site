@@ -18,7 +18,7 @@ const checkUser = async (email: string, password: string) => {
   }
   
   // Fallback для тестовых данных (можно удалить после проверки)
-  if (email === "admin@example.com" && password === "admin123") {
+  /*if (email === "admin@example.com" && password === "admin123") {
     return {
       id: "1",
       email: "admin@example.com",
@@ -26,6 +26,7 @@ const checkUser = async (email: string, password: string) => {
       role: "ADMIN",
     };
   }
+    */
   
   return null;
 };
