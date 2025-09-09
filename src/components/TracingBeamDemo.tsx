@@ -1,25 +1,83 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { calsans } from "@/fonts/calsans";
 
 import { twMerge } from "tailwind-merge";
-import { TracingBeam } from "@/components/ui/tracing-beam";
+import { TracingBeam } from "./ui/tracing-beam";
+import { PromoCard } from "./ui/promo/PromoCard";
+import Image from "next/image";
+
+
+type PromoFromApi = {
+    id: string;
+    title: string;
+    excerpt: string | null;
+    coverUrl: string | null;
+    publishedAt?: string;
+  };
+
 
 export function TracingBeamDemo() {
+  const [promos, setPromos] = useState<PromoFromApi[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchPromos = async () => {
+      try {
+        const res = await fetch("/api/promos", { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          setPromos(data);
+        }
+      } catch (error) {
+        console.error("Error fetching promos:", error);
+        setPromos([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPromos();
+  }, []);
+
+  const renderPromosSection = () => (
+    <section className="py-12 md:py-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-2xl md:text-3xl font-semibold mb-6">Акции</h2>
+        {isLoading ? (
+          <p className="text-muted-foreground italic">Загрузка акций...</p>
+        ) : promos.length === 0 ? (
+          <p className="text-muted-foreground italic">Пока нет активных акций</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {promos.map((p, i) => (
+              <PromoCard
+                key={p.id}
+                id={p.id}
+                title={p.title}
+                excerpt={p.excerpt ?? undefined}
+                coverUrl={p.coverUrl ?? undefined}
+                highlight={i === 0}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+
   return (
     <TracingBeam className="px-6">
-      <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+      <div className="max-w-2x1 mx-auto antialiased pt-4 relative">
         {dummyContent.map((item, index) => (
           <div key={`content-${index}`} className="mb-10">
-
-
             <p className={twMerge(calsans.className, "text-xl mb-4")}>
               {item.title}
             </p>
 
             <div className="text-sm  prose prose-sm dark:prose-invert">
               {item?.image && (
-                <img
+                <Image
                   src={item.image}
                   alt="blog thumbnail"
                   height="1000"
@@ -27,7 +85,7 @@ export function TracingBeamDemo() {
                   className="rounded-lg mb-10 object-cover"
                 />
               )}
-              {item.description}
+              {index === 0 ? renderPromosSection() : item.description}
             </div>
           </div>
         ))}
@@ -41,17 +99,6 @@ const dummyContent = [
     title: "Lorem Ipsum Dolor Sit Amet",
     description: (
       <>
-        <p>
-          Sit duis est minim proident non nisi velit non consectetur. Esse
-          adipisicing laboris consectetur enim ipsum reprehenderit eu deserunt
-          Lorem ut aliqua anim do. Duis cupidatat qui irure cupidatat incididunt
-          incididunt enim magna id est qui sunt fugiat. Laboris do duis pariatur
-          fugiat Lorem aute sit ullamco. Qui deserunt non reprehenderit dolore
-          nisi velit exercitation Lorem qui do enim culpa. Aliqua eiusmod in
-          occaecat reprehenderit laborum nostrud fugiat voluptate do Lorem culpa
-          officia sint labore. Tempor consectetur excepteur ut fugiat veniam
-          commodo et labore dolore commodo pariatur.
-        </p>
         <p>
           Dolor minim irure ut Lorem proident. Ipsum do pariatur est ad ad
           veniam in commodo id reprehenderit adipisicing. Proident duis

@@ -8,9 +8,12 @@
 }
 
 /* Заголовок и подвал в одну строку */
-.Header,
-.footer {
+.Header{
   display: flex;
+  position: absolute;
+  top: 17px;
+  left: 20px;
+  z-index: 20;
 }
 
 .Button:hover {
@@ -41,34 +44,75 @@
 }
 
 .firstVector {
-    /*position: absolute;
-    top: -300px;
-    left: -440px;
+    position: absolute;
+    top: -36vh;
+    max-width: 500%;
+    left: -75vh;
+    width: 218vh;
     overflow: hidden;
-*/
-position: absolute;
+  }
+
+  @supports (top: 36dvh) {
+    .firstVector { top: -36dvh; }  
+  }
+
+/* position: absolute;
 max-width: 500%;
 top: -700px;
-  right: -100px;
-width: 150%;  overflow: hidden;
-}
+right: -100px;
+width: 1400px;
+overflow: hidden;
+} */
+
 
 /* Левый SVG — позиционируется относительно firstVector */
 .leftSvg {
+  max-width: 500%;
   position: absolute;
-  left: -300px;
-  height: 100%;
-  width: 700px; /* ширина под вашу иконку */
+  top: 125vh;
+  left: -30vh;
+  width: 69vh; /* ширина под вашу иконку */
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 /* Аналогично для правого SVG (если используете) */
 .rightVector {
     position: absolute;
-    width: 700px;
-    top: -850px;
-    right: -300px;
-    height: 100%;
-    overflow: hidden;
+    top: 55vh;
+    right: -30vh;
+  width: 69vh;
+  overflow: hidden;
+}
+
+.elipseRight {
+  position: absolute;
+  overflow: hidden;
+  width: 100vh;
+  right: -50vh;
+  top: 62vh;
+}
+
+.elipseLeft {
+  position: absolute;
+  overflow: hidden;
+  width: 100vh;
+  left: -50vh;
+  top: 132vh;
+}
+
+.footer {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+align-self: start; 
+ bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20%;
+  z-index: 20;
+}
+
+.footBgF {
+  width: 300px;
+  height: 300px;
 }

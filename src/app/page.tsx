@@ -9,8 +9,8 @@ import Image from "next/image";
 import topVector from '../../public/designComponents/topVector.svg';
 import RightVectorBg from '../../public/designComponents/RightVector.svg';
 import { TracingBeamDemo } from "@/components/TracingBeamDemo";
-
-
+import Elipse from '../../public/designComponents/Ellipse.svg';
+import { titillium } from "@/fonts/TitilliumSemiBold";
 
 export const dynamic = "force-dynamic";
 
@@ -52,15 +52,20 @@ export default async function Home() {
         <div>
           <Image src={topVector} className={s.firstVector} alt="" />
           <Image src={RightVectorBg} alt="" className={s.rightVector} />
-        </div>
+          <Image src={Elipse} alt="" className={s.elipseRight} />
+          <Image src={Elipse} alt="" className={s.elipseLeft} />
+          {/*<Image src={Elipse} alt="" className={s.elipseRight} /> */}
         <Image src={LeftVectorBg} alt="" className={s.leftSvg} />
+        </div>
       </div>
 
       {/* Основной контент – положительный z-index */}
       <div className={`${s.wrapper} relative z-10`}>
         <header className={s.Header}>
           <div className="flex space-x-4">
-            
+            <h1 className={`${titillium.className} text-2xl md:text-3xl font-bold text-white`}>
+              комп.здесь
+            </h1>
           </div>
         </header>
 
@@ -149,7 +154,7 @@ export default async function Home() {
         </section>
 
         {/* Подвал */}
-        <footer className="py-8 text-center">footer</footer>
+        <footer className="py-8 text-center"><Image src='/designComponents/bgft.png' alt="footer" width={300} height={300} className={s.footBgF}/></footer>
       </div>
     </div>
   );
