@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, forwardRef } from "react";
-// @ts-ignore
 import { Renderer, Program, Mesh, Triangle } from "ogl";
 import { cn } from '@/lib/utils';
 
@@ -186,11 +185,11 @@ export const PlasmaBackground = forwardRef<HTMLDivElement, PlasmaBackgroundProps
     let raf = 0;
     const t0 = performance.now();
     const loop = (t: number) => {
-      let timeValue = (t - t0) * 0.001;
+      const timeValue = (t - t0) * 0.001;
 
       if (direction === "pingpong") {
         const cycle = Math.sin(timeValue * 0.5) * directionMultiplier;
-        (program.uniforms.uDirection as any).value = cycle;
+        (program.uniforms.uDirection as { value: number }).value = cycle;
       }
 
       (program.uniforms.iTime as any).value = timeValue;
