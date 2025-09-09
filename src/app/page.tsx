@@ -1,5 +1,4 @@
 import s from "./Home.module.css";
-import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { PromoCard } from "@/components/ui/promo/PromoCard";
 import { NewsCard } from "@/components/ui/news/NewsCard";
@@ -10,7 +9,10 @@ import topVector from '../../public/designComponents/topVector.svg';
 import RightVectorBg from '../../public/designComponents/RightVector.svg';
 import { TracingBeamDemo } from "@/components/TracingBeamDemo";
 import Elipse from '../../public/designComponents/Ellipse.svg';
-import { titillium } from "@/fonts/TitilliumSemiBold";
+import { TitilliumWebSemiBold } from "@/fonts/TitilliumSemiBold";
+import PlasmaBackground from "@/components/ui/shadcn-io/plasma-background"
+
+
 
 export const dynamic = "force-dynamic";
 
@@ -47,10 +49,21 @@ export default async function Home() {
 
   return (
     <div className="relative isolate min-h-dvh">
+    
+    <div className={s.okBG}>
+    <PlasmaBackground 
+        color="#ff6b35"
+        speed={1.2}
+        direction="forward"
+        scale={1.5}
+        opacity={0.8}
+        mouseInteractive={true}
+      />
+    </div>
       {/* Фон – отдельный слой с отрицательным z-index. Добавляем оба SVG. */}
+          <Image src={topVector} className={s.firstVector} alt="" />
       <div className={`${s.bg} absolute inset-0 -z-10 pointer-events-none`}>
         <div>
-          <Image src={topVector} className={s.firstVector} alt="" />
           <Image src={RightVectorBg} alt="" className={s.rightVector} />
           <Image src={Elipse} alt="" className={s.elipseRight} />
           <Image src={Elipse} alt="" className={s.elipseLeft} />
@@ -60,27 +73,26 @@ export default async function Home() {
       </div>
 
       {/* Основной контент – положительный z-index */}
-      <div className={`${s.wrapper} relative z-10`}>
+      <div className={`${s.wrapper} relative z-999`}>
         <header className={s.Header}>
           <div className="flex space-x-4">
-            <h1 className={`${titillium.className} text-2xl md:text-3xl font-bold text-white`}>
+            <h1 className={`${TitilliumWebSemiBold.className} ${s.logotype} text-2xl md:text-3xl font-bold text-white`}>
               комп.здесь
             </h1>
           </div>
         </header>
 
         {/* Hero-секция */}
-        <section className="py-12 md:py-16 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Добро пожаловать в наш клуб
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Откройте для себя мир возможностей и станьте частью нашего сообщества
-          </p>
-          <Button size="lg" className="bg-red-600 hover:bg-red-700">
-            Присоединиться
-          </Button>
-        </section>
+        <div className={s.heroWrapper}>
+        <h1 className={`${TitilliumWebSemiBold.className} ${s.komp} text-2xl md:text-8xl font-bold text-white`}>
+              комп.<span className={`${TitilliumWebSemiBold.className} ${s.zdes} text-2x1 md:text-8xl font-bold`}>
+              здесь
+            </span>
+            </h1>
+            <h1 className="font-titillium-regular text-2xl md:text-3xl text-white">
+              Принципиально новое киберпространство, созданное для <span className="text-crimson font-bold underline">твоих</span> побед.
+            </h1>
+        </div>
 
         {/* TracingBeam Demo секция */}
         <section className="py-12 md:py-16">
@@ -157,5 +169,6 @@ export default async function Home() {
         <footer className="py-8 text-center"><Image src='/designComponents/bgft.png' alt="footer" width={300} height={300} className={s.footBgF}/></footer>
       </div>
     </div>
+    
   );
 }

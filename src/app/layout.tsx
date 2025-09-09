@@ -4,7 +4,8 @@ import "./globals.css";
 import "@uploadthing/react/styles.css";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { UploadThingProvider } from "@/components/providers/UploadThingProvider";
-import { titillium } from "@/fonts/TitilliumSemiBold";
+import { TitilliumWebSemiBold } from "@/fonts/TitilliumSemiBold";
+import { titilliumRegular } from "@/fonts/TitilliumRegular";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,8 +41,8 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.ico" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${titillium.variable} antialiased text-zinc-100 selection:bg-red-500`}
-        style={{ backgroundColor: '#171717' }}
+        className={`${geistSans.variable} ${geistMono.variable} ${TitilliumWebSemiBold.variable} ${titilliumRegular.variable} antialiased text-zinc-100 selection:bg-red-500`}
+        style={{ backgroundColor: '#101010' }}
       >
         
         <SessionProvider>

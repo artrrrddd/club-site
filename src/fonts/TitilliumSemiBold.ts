@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 
-export const titillium = localFont({
-  src: './CalSansRegular.woff2',
+export const TitilliumWebSemiBold = localFont({
+  src: './TitilliumWebSemiBold.woff2',
   variable: "--font-titillium",
   display: "swap",
 });
