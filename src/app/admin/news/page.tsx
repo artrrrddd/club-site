@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NewsList } from "@/components/admin/NewsList";
+import { newsApi } from "@/lib/data";
 
 export default async function AdminNewsPage() {
   const session = await getServerSession(authOptions);
@@ -11,6 +12,9 @@ export default async function AdminNewsPage() {
   if (!session || session.user.role !== "ADMIN") {
     redirect("/login");
   }
+
+  // Получаем данные на серверной стороне
+  const news = await newsApi.getAll();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -24,7 +28,7 @@ export default async function AdminNewsPage() {
               <h1 className="text-3xl font-bold text-gray-900">Управление новостями</h1>
             </div>
             <div className="flex space-x-4">
-              <Link href="/demo/news-form">
+              <Link href="/admin/news/create">
                 <Button>Создать новость</Button>
               </Link>
               <Link href="/">
@@ -36,7 +40,7 @@ export default async function AdminNewsPage() {
       </header>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <NewsList />
+        <NewsList initialNews={news} />
       </main>
     </div>
   );

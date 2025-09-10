@@ -67,7 +67,7 @@ export const TracingBeam = ({
           <motion.div
             transition={{
               duration: 0.2,
-              delay: 0.5,
+              delay: 0,
             }}
             animate={{
               backgroundColor: scrollYProgress.get() > 0 ? "white" : "#10b981",

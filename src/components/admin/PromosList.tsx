@@ -17,9 +17,13 @@ interface Promo {
   updatedAt: Date | string;
 }
 
-export function PromosList() {
-  const [promos, setPromos] = useState<Promo[]>([]);
-  const [loading, setLoading] = useState(true);
+interface PromosListProps {
+  initialPromos: Promo[];
+}
+
+export function PromosList({ initialPromos }: PromosListProps) {
+  const [promos, setPromos] = useState<Promo[]>(initialPromos);
+  const [loading, setLoading] = useState(false);
 
   const fetchPromos = async () => {
     try {
@@ -33,9 +37,7 @@ export function PromosList() {
     }
   };
 
-  useEffect(() => {
-    fetchPromos();
-  }, []);
+  // Данные уже переданы как пропсы, поэтому не нужно загружать их при монтировании
 
   // Обновляем список при возвращении на страницу
   useEffect(() => {

@@ -52,7 +52,7 @@ export async function PUT(
     
     const data = promoSchema.parse(body);
 
-    const updated = promosApi.update(id, {
+    const updated = await promosApi.update(id, {
       title: data.title,
       excerpt: data.excerpt || undefined,
       coverUrl: data.coverUrl || undefined,
@@ -101,9 +101,9 @@ export async function DELETE(
     console.log("Attempting to delete promo with ID:", id);
     
     // Отладочная информация
-    debugData();
+    await debugData();
     
-    const success = promosApi.delete(id);
+    const success = await promosApi.delete(id);
     console.log("Delete result:", success);
 
     if (success) {

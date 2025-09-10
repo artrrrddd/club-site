@@ -23,17 +23,21 @@ export function PromoCard({
   highlight = false,
 }: PromoCardProps) {
   return (
-    <Card className={cn("overflow-hidden transition shadow-sm hover:shadow-md", highlight && "ring-2 ring-primary/50")}>
+    <Card className={cn("overflow-hidden transition shadow-sm hover:shadow-md bg-[linear-gradient(180deg,rgba(0,0,0,0.8),rgba(0,0,0,0.6))] backdrop-blur-lg border-white/20 h-full flex flex-col", highlight && "ring-2 ring-primary/50")}>
       {coverUrl && <Image src={coverUrl} alt={title} width={400} height={225} className="w-full aspect-video object-cover" />}
 
       <CardHeader>
-        <CardTitle className="text-lg">{title}</CardTitle>
+        <CardTitle className="text-lg text-white">{title}</CardTitle>
       </CardHeader>
 
-      <CardContent className="grid gap-3">
-        {excerpt && <p className="text-sm text-muted-foreground">{excerpt}</p>}
-        <div>
-          <Button onClick={() => alert(id)} aria-label={`Подробнее об акции: ${title}`}>
+      <CardContent className="flex flex-col gap-3 flex-1 justify-between">
+        {excerpt && <p className="text-sm text-white/80 flex-1">{excerpt}</p>}
+        <div className="mt-auto">
+          <Button 
+            onClick={() => alert(id)} 
+            aria-label={`Подробнее об акции: ${title}`}
+            className="bg-white/10 hover:bg-white/20 text-white border-white/40 hover:border-white/60 w-full"
+          >
             {ctaLabel}
           </Button>
         </div>

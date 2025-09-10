@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@uploadthing/react/styles.css";
 import { SessionProvider } from "@/components/providers/SessionProvider";
 import { UploadThingProvider } from "@/components/providers/UploadThingProvider";
 import { TitilliumWebSemiBold } from "@/fonts/TitilliumSemiBold";
 import { titilliumRegular } from "@/fonts/TitilliumRegular";
+import { Geist } from "@/fonts/geist";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const geistSans = Geist;
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -42,7 +40,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${TitilliumWebSemiBold.variable} ${titilliumRegular.variable} antialiased text-zinc-100 selection:bg-red-500`}
-        style={{ backgroundColor: '#101010' }}
+        style={{ backgroundColor: 'black' }}
       >
         
         <SessionProvider>

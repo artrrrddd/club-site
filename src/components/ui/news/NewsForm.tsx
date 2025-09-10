@@ -38,6 +38,8 @@ export function NewsForm() {
     const created = await res.json();
     alert("Сохранено: " + created.title);
     reset();
+    // Редирект на страницу управления новостями
+    window.location.href = "/admin/news";
   };
 
   return (

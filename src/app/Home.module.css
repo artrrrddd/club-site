@@ -11,8 +11,8 @@
 .Header{
   display: flex;
   position: absolute;
-  top: 17px;
-  left: 20px;
+  top: 11px;
+  left: 17px;
   z-index: 20;
 }
 
@@ -35,7 +35,7 @@
 /* Слой фона — занимает всю страницу */
 .bg {
   position: absolute;
-  top: 0;
+  top: 400px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -132,13 +132,13 @@ justify-content: center;
 }
 
 .zdes {
-  font-size: 13vw;
+  font-size: 8vw;
   display: inline;
   color: crimson;
 }
 
 .komp {
-  font-size: 13vw;
+  font-size: 8vw;
 }
 
 .inline {
@@ -148,16 +148,27 @@ justify-content: center;
 
 .okBG {
   position: absolute;
-  top: 75px;
-  left: 20px;
-  right: 20px;
-  border-radius: 20px;
-  background-color: #171717;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: black;
   height: 90vh;
-  z-index: 100;
+  z-index: 0;
   overflow: hidden;
 }
 
 .logotype {
   z-index: 999;
+}
+
+/* Отключаем анимацию на мобильных устройствах */
+@media (max-width: 768px) {
+  .okBG {
+    animation: none !important;
+  }
+  
+  .okBG * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

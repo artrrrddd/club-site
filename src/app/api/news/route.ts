@@ -17,7 +17,7 @@ export async function OPTIONS() {
 
 export async function GET() {
   try {
-    const items = newsApi.getAll();
+    const items = await newsApi.getAll();
     console.log("Getting all news:", items);
     return NextResponse.json(items, { status: 200 });
   } catch (e: unknown) {
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const data = newsSchema.parse(body);
-    const created = newsApi.create({
+    const created = await newsApi.create({
       title: data.title,
       excerpt: data.excerpt || undefined,
       coverUrl: data.coverUrl || undefined,

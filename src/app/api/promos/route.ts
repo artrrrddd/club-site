@@ -22,7 +22,7 @@ export async function OPTIONS() {
 }
 
 export async function GET() {
-  const promos = promosApi.getAll();
+  const promos = await promosApi.getAll();
   console.log("Getting all promos:", promos);
   return NextResponse.json(promos, { status: 200 });
 }
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const data = promoSchema.parse(body);
 
-    const created = promosApi.create({
+    const created = await promosApi.create({
       title: data.title,
       excerpt: data.excerpt || undefined,
       coverUrl: data.coverUrl || undefined,

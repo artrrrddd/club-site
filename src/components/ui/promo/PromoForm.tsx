@@ -23,23 +23,24 @@ export function PromoForm() {
   const coverUrl = watch("coverUrl");
 
   const onSubmit = async (values: PromoFormValues) => {
-  const res = await fetch("/api/promos", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(values),
-});
+    const res = await fetch("/api/promos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
 
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert("Ошибка сохранения: " + (err?.error || res.status));
+      return;
+    }
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    alert("Ошибка сохранения: " + (err?.error || res.status));
-    return;
-  }
-
-  const created = await res.json();
-  alert("Сохранено: " + created.title);
-  reset();
-};
+    const created = await res.json();
+    alert("Сохранено: " + created.title);
+    reset();
+    // Редирект на страницу управления акциями
+    window.location.href = "/admin/promos";
+  };
 
 
   return (

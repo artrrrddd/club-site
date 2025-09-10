@@ -9,6 +9,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-titillium-regular: var(--font-titillium-regular);
+  --font-geist: var(--font-geist);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -131,4 +132,28 @@
   .text-crimson {
     color: var(--color-crimson);
   }
+}
+
+/* InfiniteMovingCards animation */
+@keyframes scroll {
+  from {
+    transform: translateX(50%);
+  }
+  to {
+    transform: translateX(calc(-100% - 1rem + 50%));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Моментальная остановка при наведении на контейнер */
+.scroller:hover .animate-scroll {
+  animation-play-state: paused;
 }

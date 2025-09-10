@@ -46,7 +46,7 @@ export async function PUT(
     
     const data = newsSchema.parse(body);
 
-    const updated = newsApi.update(id, {
+    const updated = await newsApi.update(id, {
       title: data.title,
       excerpt: data.excerpt || undefined,
       coverUrl: data.coverUrl || undefined,
@@ -95,9 +95,9 @@ export async function DELETE(
     console.log("Attempting to delete news with ID:", id);
     
     // Отладочная информация
-    debugData();
+    await debugData();
     
-    const success = newsApi.delete(id);
+    const success = await newsApi.delete(id);
     console.log("Delete result:", success);
 
     if (success) {

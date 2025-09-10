@@ -17,9 +17,13 @@ interface News {
   updatedAt: Date | string;
 }
 
-export function NewsList() {
-  const [news, setNews] = useState<News[]>([]);
-  const [loading, setLoading] = useState(true);
+interface NewsListProps {
+  initialNews: News[];
+}
+
+export function NewsList({ initialNews }: NewsListProps) {
+  const [news, setNews] = useState<News[]>(initialNews);
+  const [loading, setLoading] = useState(false);
 
   const fetchNews = async () => {
     try {
@@ -33,9 +37,7 @@ export function NewsList() {
     }
   };
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
+  // Данные уже переданы как пропсы, поэтому не нужно загружать их при монтировании
 
   // Обновляем список при возвращении на страницу
   useEffect(() => {

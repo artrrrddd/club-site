@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { AdminStats } from "@/components/admin/AdminStats";
+import { newsApi, promosApi } from "@/lib/data";
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
@@ -11,6 +12,10 @@ export default async function AdminDashboard() {
   if (!session || session.user.role !== "ADMIN") {
     redirect("/login");
   }
+
+  // Получаем данные на серверной стороне
+  const news = await newsApi.getAll();
+  const promos = await promosApi.getAll();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -31,7 +36,7 @@ export default async function AdminDashboard() {
       </header>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <AdminStats />
+        <AdminStats initialNewsCount={news.length} initialPromosCount={promos.length} />
       </main>
     </div>
   );
