@@ -61,7 +61,7 @@ export default async function Home() {
         <header className={s.Header}>
           <div className="flex space-x-4">
             <h1 className={`${TitilliumWebSemiBold.className} ${s.logotype} text-2x1 md:text-3xl font-bold text-white`}>
-              комп.здесь
+              комп.<span className="text-crimson">здесь</span>
             </h1>
           </div>
         </header>
@@ -75,13 +75,30 @@ export default async function Home() {
         <section className="py-12 md:py-16">
           <TracingBeam className="px-6">
             <div className="max-w-6xl mx-auto antialiased pt-4 relative">
-              <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Наши достижения</h2>
+              <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Наш арсенал: 20 заряженных боевых компов</h2>
               <CardsGrid />
             </div>
           </TracingBeam>
         </section>
 
+{/* Тарифы */}
+<section className={s.cardwrap}>
+          <Card className={s.Card}>
+            <CardHeader><CardTitle>Час</CardTitle></CardHeader>
+            <CardContent><p>200₽</p></CardContent>
 
+          </Card>
+
+          <Card className={s.Card}>
+            <CardHeader><CardTitle>Ночь</CardTitle></CardHeader>
+            <CardContent><p>500₽</p></CardContent>
+          </Card>
+
+          <Card className={s.Card}>
+            <CardHeader><CardTitle>VIP</CardTitle></CardHeader>
+            <CardContent><p>300₽</p></CardContent>
+          </Card>
+        </section>
 
         {/* Новости и акции */}
         <NewsAndPromos 
@@ -101,27 +118,10 @@ export default async function Home() {
           }))} 
         />
 
-        {/* Тарифы */}
-        <section className={s.cardwrap}>
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>Час</CardTitle></CardHeader>
-            <CardContent><p>200₽</p></CardContent>
-
-          </Card>
-
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>Ночь</CardTitle></CardHeader>
-            <CardContent><p>500₽</p></CardContent>
-          </Card>
-
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>VIP</CardTitle></CardHeader>
-            <CardContent><p>300₽</p></CardContent>
-          </Card>
-        </section>
+        
 
         {/* Подвал */}
-        <footer className="py-8 text-center"><Image src='/designComponents/bgft.png' alt="footer" width={300} height={300} className={s.footBgF}/></footer>
+        <footer className="py-8 text-center"></footer>
       </div>
     </div>
     
