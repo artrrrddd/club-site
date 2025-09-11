@@ -261,3 +261,15 @@ justify-content: center;
   top: 760px;
   z-index: 10001;
 }
+
+@media (max-width: 640px) {
+  .bttn {
+    top: 650px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 769px) {
+  .bttn {
+    top: 700px;
+  }
+}
