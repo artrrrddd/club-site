@@ -11,8 +11,7 @@ import { TitilliumWebSemiBold } from "@/fonts/TitilliumSemiBold";
 import { SparklesPreview } from "@/components/SparklesPreview";
 import { NewsAndPromos } from "@/components/landing/NewsAndPromos";
 import { newsApi, promosApi } from "@/lib/data";
-
-
+import { TypewriterEffectSmoothDemo } from "@/components/TypewriterEffectSmoothDemo";
 
 export const dynamic = "force-dynamic";
 
@@ -26,7 +25,11 @@ export default async function Home() {
   console.log("Home page - Promos data:", promos);
 
   return (
-    <div className="relative isolate min-h-dvh">
+    <div className="relative isolate min-h-dvh overflow-x-hidden">
+      {/* Фон – отдельный слой с отрицательным z-index. Добавляем оба SVG. */}
+      <div className={s.firstVectorContainer}>
+        <Image src={topVector} className={s.firstVector} alt="" />
+      </div>
     
     <div className={s.okBG}>
     {/* <ResponsivePlasmaBackground 
@@ -36,13 +39,13 @@ export default async function Home() {
         scale={1.5}
         opacity={0.8}
         mouseInteractive={true}
-      /> */}
-
+        /> */}
+<div className={s.okBGinner}>
 <SparklesPreview />
-
+        <TypewriterEffectSmoothDemo />
+</div>
+  
     </div>
-      {/* Фон – отдельный слой с отрицательным z-index. Добавляем оба SVG. */}
-          <Image src={topVector} className={s.firstVector} alt="" />
       <div className={`${s.bg} absolute inset-0 -z-10 pointer-events-none`}>
         <div>
           <Image src={RightVectorBg} alt="" className={s.rightVector} />
@@ -79,6 +82,7 @@ export default async function Home() {
         </section>
 
 
+
         {/* Новости и акции */}
         <NewsAndPromos 
           news={news.map(newsItem => ({
@@ -102,6 +106,7 @@ export default async function Home() {
           <Card className={s.Card}>
             <CardHeader><CardTitle>Час</CardTitle></CardHeader>
             <CardContent><p>200₽</p></CardContent>
+
           </Card>
 
           <Card className={s.Card}>
