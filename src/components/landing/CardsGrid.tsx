@@ -1,14 +1,19 @@
 "use client";
 
-import React, { memo } from "react";
+import React from "react";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
-import Image from "next/image"
+import Image from "next/image";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 type Item = {
   area: string;                 // tailwind arbitrary grid-area
   title: string;
   description: React.ReactNode;
   icon?: React.ReactNode;
+};
+
+type GridItemProps = Item & {
+  isMobile: boolean;
 };
 
 const leftColumnItems: Item[] = [
@@ -22,13 +27,13 @@ const leftColumnItems: Item[] = [
     icon: <Image src="/designComponents/monik.svg" alt="GPU" width={110} height={110} />,
     area: "[grid-area:2/1/3/2]",
     title: "Монитор",
-    description: `24-25" | 180 Гц | Full HD (1920х1080)`,
+    description: `24-25" | 165 Гц | Full HD (1920х1080)`,
   },
   {
     area: "[grid-area:3/1/4/2]",
     icon: <Image src="/designComponents/klava.svg" alt="GPU" width={110} height={110} />,
     title: "Клавиатура и мышь",
-    description: "Профессиональная игровая периферия: мышь, клава, ковер — все для твоей точности.",
+    description: "Профессиональная игровая периферия: мышь - G102, клава, ковер — все для твоей точности.",
   },
 ];
 
@@ -51,11 +56,13 @@ const rightColumnItems: Item[] = [
     area: "[grid-area:3/1/4/2]",
     icon: <Image src="/designComponents/klava.svg" alt="GPU" width={110} height={110} />,
     title: "Клавиатура и мышь",
-    description: "Профессиональная игровая периферия: мышь, клава, ковер — все для твоей точности.",
+    description: "Профессиональная игровая периферия: мышь - MSI GM50, клава, ковер — все для твоей точности.",
   },
 ];
 
 export default function CardsGrid() {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="px-5">
       {/* Контейнер с двумя секциями */}
@@ -67,7 +74,7 @@ export default function CardsGrid() {
           </h2>
           <ul className="grid grid-cols-1 gap-4">
             {leftColumnItems.map((it, i) => (
-              <GridItem key={i} {...it} />
+              <GridItem key={i} {...it} isMobile={isMobile} />
             ))}
           </ul>
         </div>
@@ -79,7 +86,7 @@ export default function CardsGrid() {
           </h2>
           <ul className="grid grid-cols-1 gap-4">
             {rightColumnItems.map((it, i) => (
-              <GridItem key={i} {...it} />
+              <GridItem key={i} {...it} isMobile={isMobile} />
             ))}
           </ul>
         </div>
@@ -88,7 +95,7 @@ export default function CardsGrid() {
   );
 }
 
-const GridItem = ({ area, icon, title, description }: GridItemProps) => {
+const GridItem = ({ area, icon, title, description, isMobile }: GridItemProps) => {
   return (
     <li className={`list-none ${area}`}>
       <div className="relative h-full rounded-2xl border border-white/20 p-2 md:rounded-3xl md:p-3">
@@ -97,7 +104,7 @@ const GridItem = ({ area, icon, title, description }: GridItemProps) => {
           borderWidth={2}
           spread={64}
           glow
-          disabled={false}
+          disabled={isMobile}
           proximity={72}
           inactiveZone={0.08}
         />

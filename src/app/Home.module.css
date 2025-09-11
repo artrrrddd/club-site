@@ -75,6 +75,14 @@ overflow: hidden;
   width: 69vh; /* ширина под вашу иконку */
   overflow: hidden;
 }
+.leftSvg1 {
+  max-width: 500%;
+  position: absolute;
+  top: 260vh;
+  left: -30vh;
+  width: 69vh; /* ширина под вашу иконку */
+  overflow: hidden;
+}
 
 /* Аналогично для правого SVG (если используете) */
 .rightVector {
@@ -85,32 +93,69 @@ overflow: hidden;
   overflow: hidden;
 }
 
+.rightVector1 {
+  position: absolute;
+  top: 190vh;
+  right: -30vh;
+width: 69vh;
+overflow: hidden;
+}
+
 .elipseRight {
   position: absolute;
   overflow: hidden;
-  width: 100vh;
-  right: -50vh;
-  top: 62vh;
+  width: 200vh;
+  right: -100vh;
+  top: 22vh;
+}
+
+.elipseRight1 {
+  position: absolute;
+  overflow: hidden;
+  width: 200vh;
+  right: -100vh;
+  top: 155vh;
 }
 
 .elipseLeft {
   position: absolute;
   overflow: hidden;
-  width: 100vh;
-  left: -50vh;
-  top: 132vh;
+  width: 200vh;
+  left: -100vh;
+  top: 80vh;
+}
+
+.elipseLeft1 {
+  position: absolute;
+  overflow: hidden;
+  width: 200vh;
+  left: -100vh;
+  top: 225vh;
+}
+
+.elipseRight2 {
+  position: absolute;
+  overflow: hidden;
+  width: 200vh;
+  right: -100vh;
+  top: 290vh;
+}
+
+.rightVector2 {
+  position: absolute;
+  top: 330vh;
+  right: -30vh;
+width: 69vh;
+overflow: hidden;
 }
 
 .footer {
-  position: absolute;
+  position: relative;
   display: flex;
-  flex-direction: row;
-align-self: start; 
- bottom: 0;
-  left: 0;
+  flex-direction: column;
   width: 100%;
-  height: 20%;
   z-index: 20;
+  margin-top: 4rem;
 }
 
 .footBgF {
@@ -187,4 +232,32 @@ justify-content: center;
   .okBGinner {
     padding: 14rem 0 2rem 0;
   }
+}
+
+/* Стили для футера */
+.socialButton {
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  background-color: rgb(31 41 55);
+}
+
+.socialButton:hover {
+  background-color: crimson;
+  transform: scale(1.05);
+}
+
+.socialButton svg {
+  transition: transform 0.3s ease;
+}
+
+.socialButton:hover svg {
+  transform: scale(1.1);
+}
+
+.bttn {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 760px;
+  z-index: 10001;
 }

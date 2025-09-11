@@ -1,5 +1,4 @@
 import s from "./Home.module.css";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import LeftVectorBg from "../../public/designComponents/LeftVector.svg";
 import Image from "next/image";
 import topVector from '../../public/designComponents/topVector.svg';
@@ -12,6 +11,8 @@ import { SparklesPreview } from "@/components/SparklesPreview";
 import { NewsAndPromos } from "@/components/landing/NewsAndPromos";
 import { newsApi, promosApi } from "@/lib/data";
 import { TypewriterEffectSmoothDemo } from "@/components/TypewriterEffectSmoothDemo";
+import Pricing from '@/components/landing/Pricing'
+import Footer from '@/components/landing/Footer'
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,7 @@ export default async function Home() {
       {/* Фон – отдельный слой с отрицательным z-index. Добавляем оба SVG. */}
       <div className={s.firstVectorContainer}>
         <Image src={topVector} className={s.firstVector} alt="" />
+
       </div>
     
     <div className={s.okBG}>
@@ -46,6 +48,9 @@ export default async function Home() {
 </div>
   
     </div>
+        <a href="tel:+7(950)113-20-15" className={`${s.bttn} absolute w-32 sm:w-60 h-10 sm:h-10 rounded-xl bg-crimson text-white border border-black text-base sm:text-lg font-titillium flex items-center justify-center z-50 pointer-events-auto cursor-pointer hover:bg-red-600 transition-colors`}>
+          Забронировать
+        </a>
       <div className={`${s.bg} absolute inset-0 -z-10 pointer-events-none`}>
         <div>
           <Image src={RightVectorBg} alt="" className={s.rightVector} />
@@ -53,6 +58,15 @@ export default async function Home() {
           <Image src={Elipse} alt="" className={s.elipseLeft} />
           {/*<Image src={Elipse} alt="" className={s.elipseRight} /> */}
         <Image src={LeftVectorBg} alt="" className={s.leftSvg} />
+        <Image src={RightVectorBg} alt="" className={s.rightVector1} />
+        <Image src={Elipse} alt="" className={s.elipseRight1} />
+        <Image src={Elipse} alt="" className={s.elipseLeft1} />
+        <Image src={LeftVectorBg} alt="" className={s.leftSvg1} />
+        <Image src={RightVectorBg} alt="" className={s.rightVector2} />
+        <Image src={Elipse} alt="" className={s.elipseRight2} />
+
+
+
         </div>
       </div>
 
@@ -75,30 +89,17 @@ export default async function Home() {
         <section className="py-12 md:py-16">
           <TracingBeam className="px-6">
             <div className="max-w-6xl mx-auto antialiased pt-4 relative">
-              <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Наш арсенал: 20 заряженных боевых компов</h2>
+            <h2 className="text-4xl font-bold text-white text-center mb-16">
+          НАШ АРСЕНАЛ
+        </h2>
               <CardsGrid />
             </div>
           </TracingBeam>
         </section>
 
-{/* Тарифы */}
-<section className={s.cardwrap}>
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>Час</CardTitle></CardHeader>
-            <CardContent><p>200₽</p></CardContent>
+        <Pricing />
 
-          </Card>
 
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>Ночь</CardTitle></CardHeader>
-            <CardContent><p>500₽</p></CardContent>
-          </Card>
-
-          <Card className={s.Card}>
-            <CardHeader><CardTitle>VIP</CardTitle></CardHeader>
-            <CardContent><p>300₽</p></CardContent>
-          </Card>
-        </section>
 
         {/* Новости и акции */}
         <NewsAndPromos 
@@ -121,7 +122,7 @@ export default async function Home() {
         
 
         {/* Подвал */}
-        <footer className="py-8 text-center"></footer>
+        <Footer />
       </div>
     </div>
     
