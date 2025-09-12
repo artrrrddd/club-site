@@ -65,7 +65,7 @@ export function PromoForm() {
       {/* Краткое описание */}
       <div>
         <label htmlFor="excerpt" className="block text-sm font-medium">
-          Краткое описание (до 200)
+          Краткое описание (до 500)
         </label>
         <textarea
           id="excerpt"

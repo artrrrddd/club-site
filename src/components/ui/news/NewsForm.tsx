@@ -57,7 +57,7 @@ export function NewsForm() {
       </div>
 
       <div>
-        <label htmlFor="excerpt" className="block text-sm font-medium">Краткое описание (до 200)</label>
+        <label htmlFor="excerpt" className="block text-sm font-medium">Краткое описание (до 500)</label>
         <textarea
           id="excerpt"
           className="mt-1 w-full rounded-md border px-3 py-2"

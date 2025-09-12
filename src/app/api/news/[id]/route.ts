@@ -10,7 +10,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const news = newsApi.getById(id);
+    const news = await newsApi.getById(id);
 
     if (news) {
       return NextResponse.json(news);

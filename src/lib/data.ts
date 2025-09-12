@@ -4,8 +4,8 @@ import { PrismaClient } from '@prisma/client';
 export interface News {
   id: string;
   title: string;
-  excerpt?: string;
-  coverUrl?: string;
+  excerpt?: string | null;
+  coverUrl?: string | null;
   publishedAt: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -14,8 +14,8 @@ export interface News {
 export interface Promo {
   id: string;
   title: string;
-  excerpt?: string;
-  coverUrl?: string;
+  excerpt?: string | null;
+  coverUrl?: string | null;
   publishedAt: Date;
   createdAt: Date;
   updatedAt: Date;

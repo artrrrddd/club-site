@@ -10,8 +10,8 @@ import Link from "next/link";
 interface Promo {
   id: string;
   title: string;
-  excerpt?: string;
-  coverUrl?: string;
+  excerpt?: string | null;
+  coverUrl?: string | null;
   publishedAt: Date | string;
   createdAt: Date | string;
   updatedAt: Date | string;
@@ -24,6 +24,7 @@ export default function EditPromoPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -35,6 +36,7 @@ export default function EditPromoPage() {
     const fetchPromo = async () => {
       try {
         const response = await fetch(`/api/promos/${params.id}`);
+        
         if (response.ok) {
           const data = await response.json();
           setPromo(data);
@@ -44,7 +46,8 @@ export default function EditPromoPage() {
             coverUrl: data.coverUrl || "",
           });
         } else {
-          setError("Акция не найдена");
+          const errorData = await response.json();
+          setError(errorData.error || "Акция не найдена");
         }
       } catch (error) {
         console.error("Error fetching promo:", error);
@@ -63,6 +66,7 @@ export default function EditPromoPage() {
     e.preventDefault();
     setSaving(true);
     setError("");
+    setSuccess(false);
 
     try {
       const response = await fetch(`/api/promos/${params.id}`, {
@@ -74,7 +78,10 @@ export default function EditPromoPage() {
       });
 
       if (response.ok) {
-        router.push("/admin/promos");
+        setSuccess(true);
+        setTimeout(() => {
+          router.push("/admin/promos");
+        }, 1500);
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Ошибка при сохранении");
@@ -97,21 +104,38 @@ export default function EditPromoPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div>Загрузка...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Card className="w-full max-w-md">
+          <CardContent className="text-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <h3 className="text-lg font-medium text-gray-900">Загрузка акции...</h3>
+            <p className="text-sm text-gray-500 mt-2">Пожалуйста, подождите</p>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   if (error && !promo) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <Card className="w-full max-w-md">
           <CardContent className="text-center py-12">
-            <h3 className="text-lg font-medium text-red-600 mb-4">{error}</h3>
-            <Link href="/admin/promos">
-              <Button>← Назад к акциям</Button>
-            </Link>
+            <div className="text-red-500 text-6xl mb-4">⚠️</div>
+            <h3 className="text-lg font-medium text-red-600 mb-2">Ошибка загрузки</h3>
+            <p className="text-sm text-gray-600 mb-6">{error}</p>
+            <div className="space-y-2">
+              <Link href="/admin/promos">
+                <Button className="w-full">← Назад к акциям</Button>
+              </Link>
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={() => window.location.reload()}
+              >
+                🔄 Попробовать снова
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>
@@ -179,8 +203,28 @@ export default function EditPromoPage() {
                 />
               </div>
 
+              {success && (
+                <div className="bg-green-50 border border-green-200 rounded-md p-4">
+                  <div className="flex">
+                    <div className="text-green-400 mr-3">✅</div>
+                    <div>
+                      <h4 className="text-sm font-medium text-green-800">Сохранено успешно!</h4>
+                      <p className="text-sm text-green-600 mt-1">Перенаправление на страницу акций...</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {error && (
-                <div className="text-red-600 text-sm">{error}</div>
+                <div className="bg-red-50 border border-red-200 rounded-md p-4">
+                  <div className="flex">
+                    <div className="text-red-400 mr-3">⚠️</div>
+                    <div>
+                      <h4 className="text-sm font-medium text-red-800">Ошибка сохранения</h4>
+                      <p className="text-sm text-red-600 mt-1">{error}</p>
+                    </div>
+                  </div>
+                </div>
               )}
 
               <div className="flex space-x-4">
