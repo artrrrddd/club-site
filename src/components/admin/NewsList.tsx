@@ -69,7 +69,7 @@ export function NewsList({ initialNews }: NewsListProps) {
             <p className="text-gray-600 mb-4">
               Создайте первую новость для вашего сайта
             </p>
-            <Link href="/demo/news-form">
+            <Link href="/admin/news/create">
               <Button>Создать новость</Button>
             </Link>
           </CardContent>

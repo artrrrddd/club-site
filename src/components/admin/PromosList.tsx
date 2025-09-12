@@ -69,7 +69,7 @@ export function PromosList({ initialPromos }: PromosListProps) {
             <p className="text-gray-600 mb-4">
               Создайте первую акцию для вашего сайта
             </p>
-            <Link href="/demo/promo-form">
+            <Link href="/admin/promos/create">
               <Button>Создать акцию</Button>
             </Link>
           </CardContent>
